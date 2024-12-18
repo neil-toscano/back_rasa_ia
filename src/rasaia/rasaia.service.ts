@@ -9,7 +9,7 @@ export class RasaiaService {
   async sendRasaIa(rasaMessage: RasaMessage) {
     const { sender, message } = rasaMessage;
 
-    const url = process.env.RASA_IA_URL;
+    const url = 'http://localhost:5005/webhooks/rest/webhook';
     try {
       const result = await this.http.post<any>(url, {
         sender,
