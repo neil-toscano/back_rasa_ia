@@ -13,6 +13,11 @@ import { WhatsappService } from './whatsapp.service';
 export class WhatsappController {
   constructor(private readonly whatsappService: WhatsappService) {}
 
+  @Get('test')
+  test() {
+    console.log('test');
+  }
+
   @Post('webhooks')
   async webhooks(@Body() info: any) {
     console.log(JSON.stringify(info), 'info');
