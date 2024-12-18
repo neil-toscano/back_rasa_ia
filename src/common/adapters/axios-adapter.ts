@@ -26,6 +26,7 @@ export class AxiosAdapter implements HttpAdapter {
       console.log(data, 'data');
       return data;
     } catch (error: any) {
+      console.log(url, payload, 'url');
       console.log('ocurrio-error');
       console.log(error.message, 'error-message');
       if (error.response) {
