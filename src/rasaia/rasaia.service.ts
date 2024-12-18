@@ -15,7 +15,7 @@ export class RasaiaService {
         sender,
         message,
       });
-
+      console.log(result, 'result');
       return result;
     } catch (error) {
       console.log(error, 'rasa-error');
