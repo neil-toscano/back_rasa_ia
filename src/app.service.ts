@@ -5,8 +5,14 @@ import axios from 'axios';
 export class AppService {
   async getHello(): Promise<string> {
     try {
-      const dato = await axios.get('http://localhost:5005');
-      console.log('dato', dato);
+      const dato = await axios.post(
+        'http://localhost:5005/webhooks/rest/webhook',
+        {
+          sender: 'neil',
+          message: 'hola',
+        },
+      );
+      console.log('dato', dato.data);
     } catch (error) {
       console.log('error-app');
     }
