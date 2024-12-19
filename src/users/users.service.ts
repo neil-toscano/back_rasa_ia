@@ -54,6 +54,7 @@ export class UsersService {
   }
 
   async findByPhone(phoneNumber: string): Promise<User | undefined> {
+    console.log(phoneNumber, 'phoneNumber');
     const user = await this.prisma.user.findUnique({
       where: {
         phoneNumber: phoneNumber,
