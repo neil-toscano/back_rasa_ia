@@ -73,8 +73,8 @@ export class WhatsappService {
 
   async sendMessage(sendData: { phoneNumber: string; payload: object }) {
     const { phoneNumber, payload } = sendData;
-
-    const url = `${process.env.WHATSAPP_BASE_URL}/${process.env.WHATSAPP_PHONE_NUMBER}/messages`;
+    console.log(process.env.wHATSAPP_BASE_URL, 'base-url');
+    const url = `${process.env.wHATSAPP_BASE_URL}/${process.env.WHATSAPP_PHONE_NUMBER}/messages`;
 
     const data = {
       messaging_product: 'whatsapp',
