@@ -24,8 +24,9 @@ export class WhatsappService {
       message,
     });
 
+    const botPhone = process.env.BOT_PHONE;
     let user: any = await this.userService.findByPhone(phoneNumber);
-    let bot: any = await this.userService.findByPhone('51946684131');
+    let bot: any = await this.userService.findByPhone(botPhone);
 
     if (!user) {
       user = await this.userService.createUser({
@@ -38,7 +39,7 @@ export class WhatsappService {
     if (!bot) {
       bot = await this.userService.createUser({
         username: 'bot',
-        phoneNumber: '51946684131',
+        phoneNumber: botPhone,
         password: '123456789',
       });
     }
@@ -73,7 +74,6 @@ export class WhatsappService {
 
   async sendMessage(sendData: { phoneNumber: string; payload: object }) {
     const { phoneNumber, payload } = sendData;
-    console.log(process.env.wHATSAPP_BASE_URL, 'base-url');
     const url = `${process.env.wHATSAPP_BASE_URL}/${process.env.WHATSAPP_PHONE_NUMBER}/messages`;
 
     const data = {

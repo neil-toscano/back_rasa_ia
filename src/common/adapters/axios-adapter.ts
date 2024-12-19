@@ -23,11 +23,8 @@ export class AxiosAdapter implements HttpAdapter {
       const { data } = await this.axios.post<T>(url, payload, {
         headers: header,
       });
-      console.log(data, 'data');
       return data;
     } catch (error: any) {
-      console.log(url, payload, 'url');
-      console.log('ocurrio-error');
       console.log(error.message, 'error-message');
       if (error.response) {
         console.log(error.response.data, 'error-data');

@@ -9,13 +9,12 @@ export class RasaiaService {
   async sendRasaIa(rasaMessage: RasaMessage) {
     const { sender, message } = rasaMessage;
 
-    const url = 'http://localhost:5005/webhooks/rest/webhook';
+    const url = process.env.RASA_IA_URL;
     try {
       const result = await this.http.post<any>(url, {
         sender,
         message,
       });
-      console.log(result, 'result');
       return result;
     } catch (error) {
       console.log(error, 'rasa-error');

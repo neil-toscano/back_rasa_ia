@@ -78,8 +78,7 @@ export class ChatService {
     return `This action removes a #${id} chat`;
   }
 
-  sendMessage(chatMsg: any) {
-    console.log('wsp');
-    this.server.emit('chat-message', chatMsg);
+  sendMessage(info: any) {
+    this.server.emit('chat-message', info);
   }
 }
