@@ -28,6 +28,7 @@ export class WhatsappService {
     let user: any = await this.userService.findByPhone(phoneNumber);
     let bot: any = await this.userService.findByPhone(botPhone);
 
+    console.log(user, bot);
     if (!user) {
       user = await this.userService.createUser({
         username: 'usuario',
