@@ -18,7 +18,7 @@ export class WhatsappService {
 
   async webhooks(payload: WebhookMessage) {
     const { sender, message, phoneNumber } = payload;
-
+    console.log(sender, message, phoneNumber);
     const data: any[] = await this.rasaiaService.sendRasaIa({
       sender,
       message,
