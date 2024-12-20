@@ -1,8 +1,20 @@
 -- CreateEnum
 CREATE TYPE "MessageType" AS ENUM ('TEXT', 'IMAGE', 'VIDEO', 'AUDIO');
 
--- AlterTable
-ALTER TABLE "User" ADD COLUMN     "phoneNumber" TEXT;
+-- CreateEnum
+CREATE TYPE "Role" AS ENUM ('USER', 'ADMIN');
+
+-- CreateTable
+CREATE TABLE "User" (
+    "id" TEXT NOT NULL,
+    "phoneNumber" TEXT NOT NULL,
+    "username" TEXT,
+    "password" TEXT NOT NULL,
+    "role" "Role" NOT NULL DEFAULT 'ADMIN',
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "Chat" (
@@ -34,6 +46,9 @@ CREATE TABLE "UserChat" (
 
     CONSTRAINT "UserChat_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_phoneNumber_key" ON "User"("phoneNumber");
 
 -- AddForeignKey
 ALTER TABLE "Message" ADD CONSTRAINT "Message_userID_fkey" FOREIGN KEY ("userID") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
