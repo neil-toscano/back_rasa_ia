@@ -57,13 +57,25 @@ export class WhatsappService {
       const blocks: any[] = data[0].custom.blocks;
 
       this.chatService.sendMessage(blocks);
-
       for (const message of blocks) {
-        await this.sendMessage({
-          phoneNumber,
-          payload: message,
-        });
-        await new Promise((resolve: any) => setTimeout(resolve, 1000));
+        if(message?.type === 'video') {
+          const user = await this.userService.findByPhone(phoneNumber);
+          if(user.isFirstTime) {
+            await this.sendMessage({
+              phoneNumber,
+              payload: message,
+            });
+            await this.userService.update(user.id, { isFirstTime: false });
+            await new Promise((resolve: any) => setTimeout(resolve, 1000));
+          }
+        } 
+        else {
+          await this.sendMessage({
+            phoneNumber,
+            payload: message,
+          });
+          await new Promise((resolve: any) => setTimeout(resolve, 1000));
+        }
       }
       // ! envia mensaje al DB
       await this.messageService.sendMessage(
